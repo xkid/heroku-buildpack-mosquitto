@@ -1,6 +1,11 @@
 #!/bin/sh
 
-find . -name ".profile.d"
+indent() {
+    sed -u 's/^/       /'
+}
+
+echo "-----> Looking for .profile.d"
+find ${HOME} -name ".profile.d" | indent
 cwd=`pwd`
 cd $1
 echo "-----> Building mosquitto and installing to $1"
@@ -13,13 +18,13 @@ fi
 wget http://mosquitto.org/files/source/mosquitto-1.4.8.tar.gz > /dev/null 2>&1
 tar zxf mosquitto-1.4.8.tar.gz
 cd mosquitto-1.4.8/
-cmake -DARES_HEADER=$1/.apt/usr/include -DCMAKE_INSTALL_PREFIX=$1 .
-make install
+cmake -DARES_HEADER=$1/.apt/usr/include -DCMAKE_INSTALL_PREFIX=$1 . | indent
+make install 2>&1 | indent
 
 export PATH=$PATH\:$1/bin:$1/sbin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:$1/lib
 
-echo "       Setting MQTT_HOME environment variable"
+echo "-----> Setting MQTT_HOME environment variable"
 cd $cwd
 cat > .profile.d/mqtt.sh << EOF
 export MQTT_HOME=$1/bin
