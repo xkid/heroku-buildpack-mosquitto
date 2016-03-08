@@ -1,5 +1,6 @@
 #!/bin/sh
 
+find . -name ".profile.d"
 cwd=`pwd`
 cd $1
 echo "-----> Building mosquitto and installing to $1"
