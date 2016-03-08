@@ -24,9 +24,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:$1/lib
 
 echo "-----> Setting MQTT_HOME environment variable"
 cd $cwd
-echo "-----> Contents of .profile.d:"
-ls -C ${HOME}/.profile.d | indent
 cat > ${HOME}/.profile.d/mqtt.sh << EOF
 export MQTT_HOME=$1/bin
 export LD_LIBRARY_PATH=$1/lib:$LD_LIBRARY_PATH
 EOF
+echo "-----> Contents of .profile.d:"
+ls -C ${HOME}/.profile.d | indent
