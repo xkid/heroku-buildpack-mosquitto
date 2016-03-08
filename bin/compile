@@ -4,8 +4,6 @@ indent() {
     sed -u 's/^/       /'
 }
 
-echo "-----> Looking for .profile.d"
-find ${HOME} -name ".profile.d" | indent
 cwd=`pwd`
 cd $1
 echo "-----> Building mosquitto and installing to $1"
@@ -26,7 +24,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:$1/lib
 
 echo "-----> Setting MQTT_HOME environment variable"
 cd $cwd
-cat > .profile.d/mqtt.sh << EOF
+echo "-----> Contents of .profile.d:"
+ls -C ${HOME}/app/.profile.d | indent
+cat > ${HOME}/app/.profile.d/mqtt.sh << EOF
 export MQTT_HOME=$1/bin
 export LD_LIBRARY_PATH=$1/lib:$LD_LIBRARY_PATH
 EOF
