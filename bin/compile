@@ -6,7 +6,7 @@ echo "-----> Building mosquitto and installing to $1"
 wget http://mosquitto.org/files/source/mosquitto-1.4.8.tar.gz > /dev/null 2>&1
 tar zxf mosquitto-1.4.8.tar.gz
 cd mosquitto-1.4.8/
-cmake -DCMAKE_INSTALL_PREFIX=$1 .
+cmake -DARES_HEADER=$HOME/.apt/usr/include -DWITH_WEBSOCKETS=ON -DCMAKE_INSTALL_PREFIX=$1 .
 make install
 
 export =$PATH\:$1/bin
