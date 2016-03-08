@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "MQTTFramework"
+exit 0

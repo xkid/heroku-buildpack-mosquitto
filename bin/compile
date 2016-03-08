@@ -1,0 +1,20 @@
+#!/bin/sh
+
+cwd=`pwd`
+cd $1
+echo "-----> Building mosquitto and installing to $1"
+wget http://mosquitto.org/files/source/mosquitto-1.4.8.tar.gz > /dev/null 2>&1
+tar zxf mosquitto-1.4.8.tar.gz
+cd mosquitto-1.4.8/
+cmake -DCMAKE_INSTALL_PREFIX=$1 .
+make install
+
+export =$PATH\:$1/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:$1/lib
+
+echo "       Setting MQTT_HOME environment variable"
+cd $cwd
+cat > profile.d/mqtt.sh << EOF
+export MQTT_HOME=$1/bin
+export LD_LIBRARY_PATH=$1/lib:$LD_LIBRARY_PATH
+EOF
