@@ -15,7 +15,7 @@ cd mosquitto-1.4.8/
 cmake -DARES_HEADER=$1/.apt/usr/include -DCMAKE_INSTALL_PREFIX=$1 .
 make install
 
-export =$PATH\:$1/bin:$1/sbin
+export PATH=$PATH\:$1/bin:$1/sbin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:$1/lib
 
 echo "       Setting MQTT_HOME environment variable"
