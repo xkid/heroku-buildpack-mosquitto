@@ -15,7 +15,10 @@ fi
 # Download and install mosquitto
 wget http://mosquitto.org/files/source/mosquitto-1.4.11.tar.gz > /dev/null 2>&1
 tar zxf mosquitto-1.4.11.tar.gz
-cd mosquitto-1.4.11/
+cd mosquitto-1.4.11/lib/
+sed -i 's/include <ares.h>//g' mosquitto_internal.h
+cat mosquitto_internal.h
+cd ..
 sed -i 's/WITH_SRV:=yes/WITH_SRV:=no/g' config.mk
 sed -i 's/WITH_WEBSOCKETS:=no/WITH_WEBSOCKETS:=yes/g' config.mk
 cat config.mk
