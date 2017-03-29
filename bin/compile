@@ -11,7 +11,7 @@ echo "-----> Building mosquitto and installing to $1"
 if [ -f $1/.apt/usr/include/x86_64-linux-gnu/ares_build.h ]; then
     cp $1/.apt/usr/include/x86_64-linux-gnu/ares_build.h $1/.apt/usr/include/
 fi
-apt-get install libc-ares-dev
+
 # Download and install mosquitto
 wget http://mosquitto.org/files/source/mosquitto-1.4.11.tar.gz > /dev/null 2>&1
 tar zxf mosquitto-1.4.11.tar.gz
@@ -20,7 +20,7 @@ sed -i 's/WITH_SRV:=yes/WITH_SRV:=no/g' config.mk
 sed -i 's/WITH_WEBSOCKETS:=no/WITH_WEBSOCKETS:=yes/g' config.mk
 cat config.mk
 cmake -DARES_HEADER=$1/.apt/usr/include -DCMAKE_INSTALL_PREFIX=$1 . | indent
-make install 2>&1 | indent
+make WITH_SRV=no install 2>&1 | indent
 
 export PATH=$PATH\:$1/bin:$1/sbin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:$1/lib
