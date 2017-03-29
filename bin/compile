@@ -11,7 +11,7 @@ echo "-----> Building mosquitto and installing to $1"
 if [ -f $1/.apt/usr/include/x86_64-linux-gnu/ares_build.h ]; then
     cp $1/.apt/usr/include/x86_64-linux-gnu/ares_build.h $1/.apt/usr/include/
 fi
-sudo apt-get install libc-ares-dev
+apt-get install libc-ares-dev
 # Download and install mosquitto
 wget http://mosquitto.org/files/source/mosquitto-1.4.11.tar.gz > /dev/null 2>&1
 tar zxf mosquitto-1.4.11.tar.gz
