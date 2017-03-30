@@ -24,7 +24,7 @@ sed -i 's/WITH_SRV:=yes/WITH_SRV:=no/g' config.mk
 sed -i 's/WITH_WEBSOCKETS:=no/WITH_WEBSOCKETS:=yes/g' config.mk
 #cat config.mk
 cmake -DARES_HEADER=$1/.apt/usr/include -DCMAKE_INSTALL_PREFIX=$1 . | indent
-make -U WITH_SRV=no install 2>&1 | indent
+make -i WITH_SRV=no install 2>&1 | indent
 
 export PATH=$PATH\:$1/bin:$1/sbin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:$1/lib
